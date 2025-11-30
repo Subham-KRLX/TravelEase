@@ -6,15 +6,19 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function CheckoutScreen() {
   const navigation = useNavigation();
   const { cartItems, getTotalPrice, removeFromCart, updateQuantity, clearCart } = useCart();
   const { user } = useAuth();
+  const { theme } = useTheme();
+
 
   const handleCheckout = () => {
     if (!user) {
@@ -24,6 +28,7 @@ export default function CheckoutScreen() {
       ]);
       return;
     }
+
 
     if (cartItems.length === 0) {
       Alert.alert('Cart Empty', 'Please add items to cart before checkout');
@@ -46,36 +51,36 @@ export default function CheckoutScreen() {
   };
 
   const renderCartItem = (item) => (
-    <View key={`${item.type}-${item.id}`} style={styles.cartItem}>
+    <View key={`${item.type}-${item.id}`} style={[styles.cartItem, { backgroundColor: theme.card, shadowColor: theme.cardShadow, borderColor: theme.border, borderWidth: 1 }]}>
       <View style={styles.itemInfo}>
-        <Text style={styles.itemName}>
+        <Text style={[styles.itemName, { color: theme.text }]}>
           {item.type === 'flight' ? `${item.airline} - ${item.from} to ${item.to}` : item.name}
         </Text>
         {item.type === 'flight' && (
-          <Text style={styles.itemDetails}>
+          <Text style={[styles.itemDetails, { color: theme.textSecondary }]}>
             {item.departTime} - {item.arriveTime} • {item.duration}
           </Text>
         )}
         {item.type === 'hotel' && (
-          <Text style={styles.itemDetails}>{item.location}</Text>
+          <Text style={[styles.itemDetails, { color: theme.textSecondary }]}>{item.location}</Text>
         )}
-        <Text style={styles.itemPrice}>₹{item.price.toLocaleString()} × {item.quantity}</Text>
+        <Text style={[styles.itemPrice, { color: theme.primary }]}>₹{item.price.toLocaleString()} × {item.quantity}</Text>
       </View>
 
       <View style={styles.itemActions}>
-        <View style={styles.quantityControls}>
+        <View style={[styles.quantityControls, { backgroundColor: theme.backgroundSecondary }]}>
           <TouchableOpacity
-            style={styles.quantityButton}
+            style={[styles.quantityButton, { backgroundColor: theme.card }]}
             onPress={() => updateQuantity(item.id, item.type, item.quantity - 1)}
           >
-            <Ionicons name="remove" size={16} color="#1e40af" />
+            <Ionicons name="remove" size={16} color={theme.primary} />
           </TouchableOpacity>
-          <Text style={styles.quantity}>{item.quantity}</Text>
+          <Text style={[styles.quantity, { color: theme.text }]}>{item.quantity}</Text>
           <TouchableOpacity
-            style={styles.quantityButton}
+            style={[styles.quantityButton, { backgroundColor: theme.card }]}
             onPress={() => updateQuantity(item.id, item.type, item.quantity + 1)}
           >
-            <Ionicons name="add" size={16} color="#1e40af" />
+            <Ionicons name="add" size={16} color={theme.primary} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -90,12 +95,12 @@ export default function CheckoutScreen() {
 
   if (cartItems.length === 0) {
     return (
-      <View style={styles.emptyContainer}>
-        <Ionicons name="cart-outline" size={80} color="#cbd5e1" />
-        <Text style={styles.emptyTitle}>Your cart is empty</Text>
-        <Text style={styles.emptySubtitle}>Add some items to get started</Text>
+      <View style={[styles.emptyContainer, { backgroundColor: theme.background }]}>
+        <Ionicons name="cart-outline" size={80} color={theme.textTertiary} />
+        <Text style={[styles.emptyTitle, { color: theme.text }]}>Your cart is empty</Text>
+        <Text style={[styles.emptySubtitle, { color: theme.textSecondary }]}>Add some items to get started</Text>
         <TouchableOpacity
-          style={styles.browseButton}
+          style={[styles.browseButton, { backgroundColor: theme.primary }]}
           onPress={() => navigation.navigate('Home')}
         >
           <Text style={styles.browseButtonText}>Browse Deals</Text>
@@ -105,28 +110,28 @@ export default function CheckoutScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.cartItems}>
           {cartItems.map(renderCartItem)}
         </View>
       </ScrollView>
 
-      <View style={styles.summary}>
+      <View style={[styles.summary, { backgroundColor: theme.card, borderTopColor: theme.border }]}>
         <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>₹{getTotalPrice().toLocaleString()}</Text>
+          <Text style={[styles.summaryLabel, { color: theme.textSecondary }]}>Subtotal</Text>
+          <Text style={[styles.summaryValue, { color: theme.text }]}>₹{getTotalPrice().toLocaleString()}</Text>
         </View>
         <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Taxes & Fees</Text>
-          <Text style={styles.summaryValue}>₹{Math.round(getTotalPrice() * 0.18).toLocaleString()}</Text>
+          <Text style={[styles.summaryLabel, { color: theme.textSecondary }]}>Taxes & Fees</Text>
+          <Text style={[styles.summaryValue, { color: theme.text }]}>₹{Math.round(getTotalPrice() * 0.18).toLocaleString()}</Text>
         </View>
-        <View style={[styles.summaryRow, styles.totalRow]}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalValue}>₹{Math.round(getTotalPrice() * 1.18).toLocaleString()}</Text>
+        <View style={[styles.summaryRow, styles.totalRow, { borderTopColor: theme.border }]}>
+          <Text style={[styles.totalLabel, { color: theme.text }]}>Total</Text>
+          <Text style={[styles.totalValue, { color: theme.primary }]}>₹{Math.round(getTotalPrice() * 1.18).toLocaleString()}</Text>
         </View>
-        
-        <TouchableOpacity style={styles.checkoutButton} onPress={handleCheckout}>
+
+        <TouchableOpacity style={[styles.checkoutButton, { backgroundColor: theme.primary }]} onPress={handleCheckout}>
           <Text style={styles.checkoutButtonText}>Proceed to Payment</Text>
           <Ionicons name="arrow-forward" size={20} color="#fff" />
         </TouchableOpacity>

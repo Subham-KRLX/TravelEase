@@ -22,31 +22,44 @@ function CustomHeaderRight({ navigation }) {
   const { getTotalItems } = useCart();
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginRight: 8 }}>
-      <TouchableOpacity onPress={toggleTheme} style={{ padding: 4 }}>
-        <Ionicons 
-          name={isDarkMode ? 'sunny' : 'moon'} 
-          size={24} 
-          color={theme.headerText} 
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 15, marginRight: 12 }}>
+      <TouchableOpacity
+        onPress={toggleTheme}
+        style={{
+          padding: 8,
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: 20,
+        }}
+      >
+        <Ionicons
+          name={isDarkMode ? 'sunny' : 'moon'}
+          size={22}
+          color="#fff"
         />
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => navigation.navigate('Checkout')}
-        style={{ position: 'relative', padding: 4 }}
+        style={{
+          position: 'relative',
+          padding: 8,
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: 20,
+        }}
       >
-        <Ionicons name="cart" size={24} color={theme.headerText} />
+        <Ionicons name="cart" size={22} color="#fff" />
         {getTotalItems() > 0 && (
           <View style={{
             position: 'absolute',
-            top: 0,
-            right: 0,
+            top: 2,
+            right: 2,
             backgroundColor: '#ef4444',
             borderRadius: 10,
-            width: 18,
+            minWidth: 18,
             height: 18,
             justifyContent: 'center',
             alignItems: 'center',
+            paddingHorizontal: 4,
           }}>
             <Text style={{ color: '#fff', fontSize: 10, fontWeight: 'bold' }}>
               {getTotalItems()}
@@ -55,11 +68,15 @@ function CustomHeaderRight({ navigation }) {
         )}
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => navigation.navigate(user ? 'Dashboard' : 'Login')}
-        style={{ padding: 4 }}
+        style={{
+          padding: 8,
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: 20,
+        }}
       >
-        <Ionicons name="person" size={24} color={theme.headerText} />
+        <Ionicons name="person" size={22} color="#fff" />
       </TouchableOpacity>
     </View>
   );
@@ -83,43 +100,43 @@ export default function AppNavigator() {
           headerRight: () => <CustomHeaderRight navigation={navigation} />,
         })}
       >
-        <Stack.Screen 
-          name="Home" 
+        <Stack.Screen
+          name="Home"
           component={HomeScreen}
           options={{ title: 'TravelEase' }}
         />
-        <Stack.Screen 
-          name="SearchResults" 
+        <Stack.Screen
+          name="SearchResults"
           component={SearchResultsScreen}
           options={{ title: 'Search Results' }}
         />
-        <Stack.Screen 
-          name="FlightDetails" 
+        <Stack.Screen
+          name="FlightDetails"
           component={FlightDetailsScreen}
           options={{ title: 'Flight Details' }}
         />
-        <Stack.Screen 
-          name="HotelDetails" 
+        <Stack.Screen
+          name="HotelDetails"
           component={HotelDetailsScreen}
           options={{ title: 'Hotel Details' }}
         />
-        <Stack.Screen 
-          name="Checkout" 
+        <Stack.Screen
+          name="Checkout"
           component={CheckoutScreen}
           options={{ title: 'Checkout' }}
         />
-        <Stack.Screen 
-          name="Dashboard" 
+        <Stack.Screen
+          name="Dashboard"
           component={DashboardScreen}
           options={{ title: 'My Dashboard' }}
         />
-        <Stack.Screen 
-          name="Login" 
+        <Stack.Screen
+          name="Login"
           component={LoginScreen}
           options={{ title: 'Login' }}
         />
-        <Stack.Screen 
-          name="SignUp" 
+        <Stack.Screen
+          name="SignUp"
           component={SignUpScreen}
           options={{ title: 'Sign Up' }}
         />

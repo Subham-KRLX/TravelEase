@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
   StyleSheet,
-  ScrollView 
+  ScrollView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -25,7 +25,7 @@ export default function SearchBar({ type = 'flights' }) {
     checkOut: '',
     guests: '1'
   });
-  
+
   const navigation = useNavigation();
 
   const handleInputChange = (field, value) => {
@@ -57,53 +57,57 @@ export default function SearchBar({ type = 'flights' }) {
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="location-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="location-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>To</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>To</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="Delhi, Mumbai, Chennai..."
+            placeholderTextColor={theme.textTertiary}
             value={searchData.to}
             onChangeText={(value) => handleInputChange('to', value)}
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="calendar-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="calendar-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Departure Date</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Departure Date</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="DD/MM/YYYY"
+            placeholderTextColor={theme.textTertiary}
             value={searchData.departDate}
             onChangeText={(value) => handleInputChange('departDate', value)}
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="calendar-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="calendar-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Return Date</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Return Date</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="DD/MM/YYYY"
+            placeholderTextColor={theme.textTertiary}
             value={searchData.returnDate}
             onChangeText={(value) => handleInputChange('returnDate', value)}
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="people-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="people-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Passengers</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Passengers</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="1"
+            placeholderTextColor={theme.textTertiary}
             keyboardType="numeric"
             value={searchData.passengers}
             onChangeText={(value) => handleInputChange('passengers', value)}
@@ -115,52 +119,56 @@ export default function SearchBar({ type = 'flights' }) {
 
   const renderHotelSearch = () => (
     <>
-      <View style={styles.searchField}>
-        <Ionicons name="location-outline" size={20} color="#666" />
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="location-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Destination</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Destination</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="City, Hotel, or Location..."
+            placeholderTextColor={theme.textTertiary}
             value={searchData.location}
             onChangeText={(value) => handleInputChange('location', value)}
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="calendar-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="calendar-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Check-in</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Check-in</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="DD/MM/YYYY"
+            placeholderTextColor={theme.textTertiary}
             value={searchData.checkIn}
             onChangeText={(value) => handleInputChange('checkIn', value)}
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="calendar-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="calendar-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Check-out</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Check-out</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="DD/MM/YYYY"
+            placeholderTextColor={theme.textTertiary}
             value={searchData.checkOut}
             onChangeText={(value) => handleInputChange('checkOut', value)}
           />
         </View>
       </View>
-      
-      <View style={styles.searchField}>
-        <Ionicons name="people-outline" size={20} color="#666" />
+
+      <View style={[styles.searchField, { borderColor: theme.border, backgroundColor: theme.backgroundSecondary }]}>
+        <Ionicons name="people-outline" size={20} color={theme.textSecondary} />
         <View style={styles.fieldContent}>
-          <Text style={styles.label}>Guests</Text>
+          <Text style={[styles.label, { color: theme.textSecondary }]}>Guests</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, { color: theme.text }]}
             placeholder="1"
+            placeholderTextColor={theme.textTertiary}
             keyboardType="numeric"
             value={searchData.guests}
             onChangeText={(value) => handleInputChange('guests', value)}
@@ -177,13 +185,13 @@ export default function SearchBar({ type = 'flights' }) {
           style={[styles.tab, searchType === 'flights' && { backgroundColor: theme.primary }]}
           onPress={() => setSearchType('flights')}
         >
-          <Ionicons 
-            name="airplane" 
-            size={20} 
-            color={searchType === 'flights' ? '#fff' : theme.textSecondary} 
+          <Ionicons
+            name="airplane"
+            size={20}
+            color={searchType === 'flights' ? '#fff' : theme.textSecondary}
           />
           <Text style={[
-            styles.tabText, 
+            styles.tabText,
             { color: searchType === 'flights' ? '#fff' : theme.textSecondary }
           ]}>
             Flights
@@ -194,13 +202,13 @@ export default function SearchBar({ type = 'flights' }) {
           style={[styles.tab, searchType === 'hotels' && { backgroundColor: theme.primary }]}
           onPress={() => setSearchType('hotels')}
         >
-          <Ionicons 
-            name="bed" 
-            size={20} 
-            color={searchType === 'hotels' ? '#fff' : theme.textSecondary} 
+          <Ionicons
+            name="bed"
+            size={20}
+            color={searchType === 'hotels' ? '#fff' : theme.textSecondary}
           />
           <Text style={[
-            styles.tabText, 
+            styles.tabText,
             { color: searchType === 'hotels' ? '#fff' : theme.textSecondary }
           ]}>
             Hotels
@@ -211,13 +219,13 @@ export default function SearchBar({ type = 'flights' }) {
           style={[styles.tab, searchType === 'packages' && { backgroundColor: theme.primary }]}
           onPress={() => setSearchType('packages')}
         >
-          <Ionicons 
-            name="gift" 
-            size={20} 
-            color={searchType === 'packages' ? '#fff' : theme.textSecondary} 
+          <Ionicons
+            name="gift"
+            size={20}
+            color={searchType === 'packages' ? '#fff' : theme.textSecondary}
           />
           <Text style={[
-            styles.tabText, 
+            styles.tabText,
             { color: searchType === 'packages' ? '#fff' : theme.textSecondary }
           ]}>
             Packages
@@ -225,14 +233,14 @@ export default function SearchBar({ type = 'flights' }) {
         </TouchableOpacity>
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.searchForm}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
         {searchType === 'flights' ? renderFlightSearch() : renderHotelSearch()}
       </ScrollView>
-      
+
       <TouchableOpacity style={[styles.searchButton, { backgroundColor: theme.primary }]} onPress={handleSearch}>
         <Ionicons name="search" size={20} color="#fff" />
         <Text style={styles.searchButtonText}>Search</Text>

@@ -11,6 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useCart } from '../context/CartContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function SearchResultsScreen() {
   const [results, setResults] = useState([]);
@@ -18,7 +19,8 @@ export default function SearchResultsScreen() {
   const navigation = useNavigation();
   const route = useRoute();
   const { addToCart } = useCart();
-  
+  const { theme } = useTheme();
+
   const searchType = route.params?.type || 'flights';
 
   useEffect(() => {
@@ -127,47 +129,52 @@ export default function SearchResultsScreen() {
   const renderFlightCard = (flight) => (
     <TouchableOpacity
       key={flight.id}
-      style={styles.card}
+      style={[styles.card, {
+        backgroundColor: theme.card,
+        shadowColor: theme.cardShadow,
+        borderColor: theme.border,
+        borderWidth: 1,
+      }]}
       onPress={() => navigation.navigate('FlightDetails', { id: flight.id })}
     >
       <View style={styles.cardHeader}>
-        <Text style={styles.airline}>{flight.airline}</Text>
-        <Text style={styles.price}>₹{flight.price.toLocaleString()}</Text>
+        <Text style={[styles.airline, { color: theme.text }]}>{flight.airline}</Text>
+        <Text style={[styles.price, { color: theme.primary }]}>₹{flight.price.toLocaleString()}</Text>
       </View>
-      
+
       <View style={styles.flightInfo}>
         <View style={styles.flightRoute}>
           <View>
-            <Text style={styles.time}>{flight.departTime}</Text>
-            <Text style={styles.location}>{flight.from}</Text>
+            <Text style={[styles.time, { color: theme.text }]}>{flight.departTime}</Text>
+            <Text style={[styles.location, { color: theme.textSecondary }]}>{flight.from}</Text>
           </View>
-          
+
           <View style={styles.flightDuration}>
-            <Text style={styles.duration}>{flight.duration}</Text>
+            <Text style={[styles.duration, { color: theme.textSecondary }]}>{flight.duration}</Text>
             <View style={styles.flightLine}>
-              <View style={styles.line} />
-              <Ionicons name="airplane" size={16} color="#64748b" />
-              <View style={styles.line} />
+              <View style={[styles.line, { backgroundColor: theme.border }]} />
+              <Ionicons name="airplane" size={16} color={theme.textSecondary} />
+              <View style={[styles.line, { backgroundColor: theme.border }]} />
             </View>
-            <Text style={styles.stops}>{flight.stops}</Text>
+            <Text style={[styles.stops, { color: theme.success }]}>{flight.stops}</Text>
           </View>
-          
+
           <View>
-            <Text style={styles.time}>{flight.arriveTime}</Text>
-            <Text style={styles.location}>{flight.to}</Text>
+            <Text style={[styles.time, { color: theme.text }]}>{flight.arriveTime}</Text>
+            <Text style={[styles.location, { color: theme.textSecondary }]}>{flight.to}</Text>
           </View>
         </View>
       </View>
-      
+
       <View style={styles.cardActions}>
         <TouchableOpacity
-          style={styles.addButton}
+          style={[styles.addButton, { borderColor: theme.primary }]}
           onPress={() => handleAddToCart(flight)}
         >
-          <Ionicons name="add-circle" size={20} color="#1e40af" />
-          <Text style={styles.addButtonText}>Add to Cart</Text>
+          <Ionicons name="add-circle" size={20} color={theme.primary} />
+          <Text style={[styles.addButtonText, { color: theme.primary }]}>Add to Cart</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.detailsButton}>
+        <TouchableOpacity style={[styles.detailsButton, { backgroundColor: theme.primary }]}>
           <Text style={styles.detailsButtonText}>View Details</Text>
           <Ionicons name="arrow-forward" size={16} color="#fff" />
         </TouchableOpacity>
@@ -178,41 +185,46 @@ export default function SearchResultsScreen() {
   const renderHotelCard = (hotel) => (
     <TouchableOpacity
       key={hotel.id}
-      style={styles.card}
+      style={[styles.card, {
+        backgroundColor: theme.card,
+        shadowColor: theme.cardShadow,
+        borderColor: theme.border,
+        borderWidth: 1,
+      }]}
       onPress={() => navigation.navigate('HotelDetails', { id: hotel.id })}
     >
       <Image source={{ uri: hotel.image }} style={styles.hotelImage} />
-      
+
       <View style={styles.hotelContent}>
         <View style={styles.cardHeader}>
-          <Text style={styles.hotelName}>{hotel.name}</Text>
-          <Text style={styles.price}>₹{hotel.price.toLocaleString()}</Text>
+          <Text style={[styles.hotelName, { color: theme.text }]}>{hotel.name}</Text>
+          <Text style={[styles.price, { color: theme.primary }]}>₹{hotel.price.toLocaleString()}</Text>
         </View>
-        
+
         <View style={styles.hotelLocation}>
-          <Ionicons name="location" size={14} color="#64748b" />
-          <Text style={styles.locationText}>{hotel.location}</Text>
+          <Ionicons name="location" size={14} color={theme.textSecondary} />
+          <Text style={[styles.locationText, { color: theme.textSecondary }]}>{hotel.location}</Text>
         </View>
-        
+
         <View style={styles.hotelRating}>
           <View style={styles.rating}>
-            <Ionicons name="star" size={16} color="#fbbf24" />
-            <Text style={styles.ratingText}>{hotel.rating}</Text>
+            <Ionicons name="star" size={16} color={theme.gold} />
+            <Text style={[styles.ratingText, { color: theme.text }]}>{hotel.rating}</Text>
           </View>
-          <Text style={styles.reviews}>({hotel.reviews} reviews)</Text>
+          <Text style={[styles.reviews, { color: theme.textSecondary }]}>({hotel.reviews} reviews)</Text>
         </View>
-        
-        <Text style={styles.description}>{hotel.description}</Text>
-        
+
+        <Text style={[styles.description, { color: theme.textSecondary }]}>{hotel.description}</Text>
+
         <View style={styles.cardActions}>
           <TouchableOpacity
-            style={styles.addButton}
+            style={[styles.addButton, { borderColor: theme.primary }]}
             onPress={() => handleAddToCart(hotel)}
           >
-            <Ionicons name="add-circle" size={20} color="#1e40af" />
-            <Text style={styles.addButtonText}>Add to Cart</Text>
+            <Ionicons name="add-circle" size={20} color={theme.primary} />
+            <Text style={[styles.addButtonText, { color: theme.primary }]}>Add to Cart</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.detailsButton}>
+          <TouchableOpacity style={[styles.detailsButton, { backgroundColor: theme.primary }]}>
             <Text style={styles.detailsButtonText}>View Details</Text>
             <Ionicons name="arrow-forward" size={16} color="#fff" />
           </TouchableOpacity>
@@ -223,21 +235,21 @@ export default function SearchResultsScreen() {
 
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#1e40af" />
-        <Text style={styles.loadingText}>Searching for best deals...</Text>
+      <View style={[styles.loadingContainer, { backgroundColor: theme.background }]}>
+        <ActivityIndicator size="large" color={theme.primary} />
+        <Text style={[styles.loadingText, { color: theme.textSecondary }]}>Searching for best deals...</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>
+    <ScrollView style={[styles.container, { backgroundColor: theme.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.backgroundSecondary, borderBottomColor: theme.border }]}>
+        <Text style={[styles.title, { color: theme.text }]}>
           {results.length} {searchType} found
         </Text>
       </View>
-      
+
       <View style={styles.results}>
         {results.map(result =>
           result.type === 'flight' ? renderFlightCard(result) : renderHotelCard(result)
