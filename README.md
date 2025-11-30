@@ -1,205 +1,75 @@
-# TravelEase React Native App
+# MAD_PROJECT
+1. Project Title:
+TravelEase app 
 
-This is the React Native version of TravelEase, a travel booking application for flights and hotels.
+2. Your Name & Roll Number:
+Subham Sangwan – 2024-B-25092004
 
-## Features
+3. Problem Statement:
+"TravelEase addresses the complexity and time-consuming nature of travel planning by providing a convenient and efficient mobile platform for booking flights, hotels, and travel packages. It aims to simplify travel experiences through an intuitive interface."
 
-- 🛫 Flight Search & Booking
-- 🏨 Hotel Search & Booking
-- 🛒 Shopping Cart
-- 👤 User Authentication
-- 📱 Fully Responsive Mobile UI
-- 💾 Persistent Data with AsyncStorage
+4. Proposed Solution / Idea:
+"Users can browse flights and hotels, add bookings to a cart, and manage reservations with secure authentication and smooth navigation throughout the app. This solution aims to simplify the travel planning process and enhance user convenience and satisfaction."
 
-## Prerequisites
+5. Key Features:
 
-Before running this app, make sure you have:
+Real-time flight and hotel search with dynamic filtering and sorting options
 
-- Node.js (v16 or higher)
-- npm or yarn
-- Expo Go app installed on your phone (download from App Store or Google Play)
-- Expo CLI (will be installed automatically)
+Comprehensive booking management including add to cart, update, and removal of bookings
 
-## Installation
+User authentication with secure login, sign-up, and session persistence
 
-1. Navigate to the TravelEaseNative directory:
-   ```bash
-   cd TravelEaseNative
-   ```
+Personalized travel recommendations based on user preferences and location
 
-2. Install dependencies (if not already installed):
-   ```bash
-   npm install
-   ```
+Offline access to booking history and saved searches
 
-## Running the App
+Push notifications for booking confirmations, reminders, and special offers
 
-### Using Expo Go (Recommended)
+Interactive maps for hotel locations and nearby attractions
 
-1. Start the development server:
-   ```bash
-   npx expo start
-   ```
+Detailed flight and hotel information including amenities, pricing, and reviews
 
-2. This will open the Expo Developer Tools in your browser and show a QR code
+Secure payment integration with multiple payment options
 
-3. On your phone:
-   - **iOS**: Open Camera app and scan the QR code
-   - **Android**: Open Expo Go app and scan the QR code
+User profile management including booking history and personal information updates
 
-4. The app will load on your device!
+6. Target Users / Audience:
+"The target users for your travel booking app are frequent travelers, including solo travelers, families, and business professionals, who seek a convenient and personalized mobile platform for planning and managing their trips. The app also caters to tech-savvy millennials and Gen Z users who prefer seamless, on-the-go booking experiences."
 
-### Alternative Methods
+7. Technology Stack:
 
-- **iOS Simulator** (Mac only):
-  ```bash
-  npx expo start --ios
-  ```
+Frontend (Mobile App): React Native, Expo
 
-- **Android Emulator**:
-  ```bash
-  npx expo start --android
-  ```
+The technology stack for your travel booking app includes:
 
-- **Web Browser** (for testing):
-  ```bash
-  npx expo start --web
-  ```
+Frontend (Mobile App): React Native with Expo for cross-platform mobile development
 
-## Project Structure
+Backend: Node.js with Express.js for scalable server-side logic
 
-```
-TravelEaseNative/
-├── App.js                      # Main app component
-├── src/
-│   ├── components/            # Reusable components
-│   │   ├── Header.js
-│   │   └── SearchBar.js
-│   ├── context/              # Context providers
-│   │   ├── AuthContext.js
-│   │   └── CartContext.js
-│   ├── navigation/           # Navigation setup
-│   │   └── AppNavigator.js
-│   └── screens/             # Screen components
-│       ├── HomeScreen.js
-│       ├── SearchResultsScreen.js
-│       ├── FlightDetailsScreen.js
-│       ├── HotelDetailsScreen.js
-│       ├── CheckoutScreen.js
-│       ├── DashboardScreen.js
-│       ├── LoginScreen.js
-│       └── SignUpScreen.js
-```
+Database: Firebase or MongoDB for flexible, cloud-based data storage
 
-## Key Dependencies
+Maps & Location Services: Google Maps API and GPS tracking SDK for interactive maps and location tracking
 
-- **React Navigation**: For app navigation
-- **AsyncStorage**: For local data persistence
-- **Expo Vector Icons**: For icons throughout the app
-- **React Native Safe Area Context**: For safe area handling
+Push Notifications: Firebase Cloud Messaging (FCM) for real-time user alerts and updates
 
-## Features Breakdown
+8. Expected Outcome:
+"A fully functional mobile travel booking application that enables users to search and book flights and hotels easily, manage their bookings with personalized recommendations, and receive timely notifications. The app provides a seamless, efficient, and user-friendly experience for travel planning, ensuring enhanced convenience and satisfaction for frequent travelers."
 
-### Home Screen
-- Hero section with search functionality
-- Feature cards
-- Service offerings (Flights, Hotels, Packages)
-- Popular destinations carousel
-- Call-to-action section
+9. Timeline:
 
-### Search Results
-- Dynamic results based on search type (flights/hotels)
-- Add to cart functionality
-- Filter and sort options
+Week 1–2: Research, UI/UX design, and API selection
 
-### Flight/Hotel Details
-- Detailed information about selected item
-- Amenities list
-- Booking information
-- Add to cart with confirmation
+Week 3–4: Backend setup, GPS integration, and database design
 
-### Shopping Cart (Checkout)
-- View all cart items
-- Update quantities
-- Remove items
-- Proceed to payment
+Week 5–6: Frontend development including live tracking and ETA features
 
-### Dashboard
-- User profile information
-- Booking history
-- Quick actions
-- Logout functionality
+Week 7: Push notification integration and testing
 
-### Authentication
-- Login screen
-- Sign up screen
-- Persistent authentication state
+Week 8: Deployment and feedback collection
 
-## Mock Data
+10. Additional Notes:
+The system requires GPS-enabled devices installed on each shuttle to provide accurate, real-time location tracking. These devices enable features like live shuttle monitoring, ETA updates, and push notifications, ensuring effective and reliable shuttle service management
 
-Currently, the app uses mock data for:
-- Flight listings
-- Hotel listings
-- User authentication
-- Bookings
+Google Maps API costs need to be considered for scaling
 
-In a production app, these would be replaced with actual API calls to your backend server.
-
-## Customization
-
-### Colors
-The app uses a consistent color scheme defined throughout the stylesheets:
-- Primary Blue: `#1e40af`
-- Success Green: `#16a34a`
-- Warning Orange: `#f97316`
-- Danger Red: `#ef4444`
-
-You can modify these colors in each component's StyleSheet.
-
-### Adding Real API Integration
-
-To connect to a real backend:
-
-1. Create an API service file (e.g., `src/services/api.js`)
-2. Replace mock data in context files with API calls
-3. Add loading states and error handling
-4. Update AsyncStorage usage for token management
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Metro bundler errors**: Clear cache and restart
-   ```bash
-   npx expo start -c
-   ```
-
-2. **Module not found**: Reinstall dependencies
-   ```bash
-   rm -rf node_modules
-   npm install
-   ```
-
-3. **Expo Go connection issues**: Make sure your phone and computer are on the same WiFi network
-
-4. **Icon not showing**: Ensure `@expo/vector-icons` is properly installed
-
-## Next Steps
-
-- Add payment gateway integration
-- Implement real-time booking updates
-- Add push notifications
-- Implement social authentication (Google, Facebook)
-- Add map integration for location selection
-- Add reviews and ratings system
-
-## Support
-
-For issues or questions, please refer to:
-- [Expo Documentation](https://docs.expo.dev/)
-- [React Navigation Documentation](https://reactnavigation.org/)
-- [React Native Documentation](https://reactnative.dev/)
-
-## License
-
-This project is for educational purposes.
+Could be extended in the future to include ticket booking or seat availability
