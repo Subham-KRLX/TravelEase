@@ -118,6 +118,57 @@ export default function SearchResultsScreen() {
           description: 'Elegant luxury hotel with personalized service'
         }
       ];
+    } else if (type === 'packages') {
+      return [
+        {
+          id: 7,
+          type: 'package',
+          name: 'Goa Beach Paradise',
+          destination: 'Goa, India',
+          duration: '5 Days, 4 Nights',
+          includes: ['Flight', 'Hotel', 'Breakfast', 'Beach Activities'],
+          price: 24999,
+          image: 'https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&cs=tinysrgb&w=800',
+          description: 'Complete beach vacation with water sports',
+          rating: 4.7
+        },
+        {
+          id: 8,
+          type: 'package',
+          name: 'Kerala Backwater Retreat',
+          destination: 'Kerala, India',
+          duration: '6 Days, 5 Nights',
+          includes: ['Flight', 'Houseboat', 'All Meals', 'Sightseeing'],
+          price: 32999,
+          image: 'https://images.pexels.com/photos/2476632/pexels-photo-2476632.jpeg?auto=compress&cs=tinysrgb&w=800',
+          description: 'Serene backwater experience with houseboats',
+          rating: 4.9
+        },
+        {
+          id: 9,
+          type: 'package',
+          name: 'Rajasthan Heritage Tour',
+          destination: 'Rajasthan, India',
+          duration: '7 Days, 6 Nights',
+          includes: ['Flight', 'Hotel', 'Breakfast', 'Palace Tours', 'Desert Safari'],
+          price: 38999,
+          image: 'https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=800',
+          description: 'Explore royal palaces and desert landscapes',
+          rating: 4.8
+        },
+        {
+          id: 10,
+          type: 'package',
+          name: 'Himalayan Adventure',
+          destination: 'Himachal Pradesh, India',
+          duration: '4 Days, 3 Nights',
+          includes: ['Flight', 'Hotel', 'Meals', 'Trekking Guide'],
+          price: 19999,
+          image: 'https://images.pexels.com/photos/1670770/pexels-photo-1670770.jpeg?auto=compress&cs=tinysrgb&w=800',
+          description: 'Mountain trekking and valley exploration',
+          rating: 4.6
+        }
+      ];
     }
     return [];
   };
@@ -233,6 +284,72 @@ export default function SearchResultsScreen() {
     </TouchableOpacity>
   );
 
+  const renderPackageCard = (pkg) => (
+    <TouchableOpacity
+      key={pkg.id}
+      style={[styles.card, {
+        backgroundColor: theme.card,
+        shadowColor: theme.cardShadow,
+        borderColor: theme.border,
+        borderWidth: 1,
+      }]}
+      onPress={() => navigation.navigate('Home')}
+    >
+      <Image source={{ uri: pkg.image }} style={styles.hotelImage} />
+
+      <View style={styles.hotelContent}>
+        <View style={styles.cardHeader}>
+          <Text style={[styles.hotelName, { color: theme.text }]}>{pkg.name}</Text>
+          <Text style={[styles.price, { color: theme.primary }]}>₹{pkg.price.toLocaleString()}</Text>
+        </View>
+
+        <View style={styles.hotelLocation}>
+          <Ionicons name="location" size={14} color={theme.textSecondary} />
+          <Text style={[styles.locationText, { color: theme.textSecondary }]}>{pkg.destination}</Text>
+        </View>
+
+        <View style={styles.packageDuration}>
+          <Ionicons name="time-outline" size={14} color={theme.textSecondary} />
+          <Text style={[styles.locationText, { color: theme.textSecondary, marginLeft: 4 }]}>{pkg.duration}</Text>
+        </View>
+
+        <View style={styles.includesContainer}>
+          {pkg.includes.slice(0, 3).map((item, idx) => (
+            <View key={idx} style={[styles.includeBadge, { backgroundColor: theme.backgroundSecondary }]}>
+              <Text style={[styles.includeText, { color: theme.textSecondary }]}>{item}</Text>
+            </View>
+          ))}
+          {pkg.includes.length > 3 && (
+            <Text style={[styles.moreIncludes, { color: theme.textSecondary }]}>+{pkg.includes.length - 3} more</Text>
+          )}
+        </View>
+
+        <View style={styles.hotelRating}>
+          <View style={styles.rating}>
+            <Ionicons name="star" size={16} color={theme.gold} />
+            <Text style={[styles.ratingText, { color: theme.text }]}>{pkg.rating}</Text>
+          </View>
+        </View>
+
+        <Text style={[styles.description, { color: theme.textSecondary }]}>{pkg.description}</Text>
+
+        <View style={styles.cardActions}>
+          <TouchableOpacity
+            style={[styles.addButton, { borderColor: theme.primary }]}
+            onPress={() => handleAddToCart(pkg)}
+          >
+            <Ionicons name="add-circle" size={20} color={theme.primary} />
+            <Text style={[styles.addButtonText, { color: theme.primary }]}>Add to Cart</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.detailsButton, { backgroundColor: theme.primary }]}>
+            <Text style={styles.detailsButtonText}>View Details</Text>
+            <Ionicons name="arrow-forward" size={16} color="#fff" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
   if (loading) {
     return (
       <View style={[styles.loadingContainer, { backgroundColor: theme.background }]}>
@@ -251,9 +368,12 @@ export default function SearchResultsScreen() {
       </View>
 
       <View style={styles.results}>
-        {results.map(result =>
-          result.type === 'flight' ? renderFlightCard(result) : renderHotelCard(result)
-        )}
+        {results.map(result => {
+          if (result.type === 'flight') return renderFlightCard(result);
+          if (result.type === 'hotel') return renderHotelCard(result);
+          if (result.type === 'package') return renderPackageCard(result);
+          return null;
+        })}
       </View>
     </ScrollView>
   );
@@ -439,5 +559,34 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#64748b',
     lineHeight: 20,
+  },
+  packageDuration: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 4,
+    marginBottom: 8,
+  },
+  includesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+    marginVertical: 8,
+  },
+  includeBadge: {
+    backgroundColor: '#f1f5f9',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  includeText: {
+    fontSize: 11,
+    color: '#64748b',
+    fontWeight: '500',
+  },
+  moreIncludes: {
+    fontSize: 11,
+    color: '#64748b',
+    fontStyle: 'italic',
+    alignSelf: 'center',
   },
 });
