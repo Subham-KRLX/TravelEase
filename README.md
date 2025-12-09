@@ -57,6 +57,7 @@ Push Notifications: Firebase Cloud Messaging (FCM) for real-time user alerts and
 
 9. Timeline:
 
+
 Week 1–2: Research, UI/UX design, and API selection
 
 Week 3–4: Backend setup, GPS integration, and database design
