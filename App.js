@@ -5,8 +5,7 @@ import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import AppNavigator from './src/navigation/AppNavigator';
 
 function AppContent() {
-  const { isDarkMode } = useTheme();
-  
+  const { isDarkMode } = useTheme()
   return (
     <>
       <StatusBar style={isDarkMode ? 'light' : 'light'} />
